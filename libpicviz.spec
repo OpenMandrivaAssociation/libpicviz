@@ -75,7 +75,8 @@ language.
 %build
 pushd .
 %cmake -DCMAKE_SKIP_RPATH:BOOL=ON -DLIB_INSTALL_DIR=%_lib -DMOD_INSTALL_DIR=%_lib/%name-%major
-%make
+# parallel build breaks on klodia (too many cores)
+make
 popd
 
 %install
