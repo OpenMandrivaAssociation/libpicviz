@@ -16,6 +16,7 @@ URL: http://www.wallinfire.net/picviz
 #Source0: http://www.wallinfire.net/picviz/attachment/wiki/ReleasesDownload/%{name}-%{version}.tar.gz?format=raw
 Source0: %{name}-%{version}.tar.gz
 Patch0: libpicviz-0.6.1-fix-underlinking.patch
+Patch1: libpicviz-0.6.1-external-libevent.patch
 
 BuildRequires: cmake
 BuildRequires: bison
@@ -23,7 +24,7 @@ BuildRequires: flex
 BuildRequires: python-devel
 BuildRequires: pkgconfig
 BuildRequires: pcre-devel
-BuildRequires: libevent-devel
+BuildRequires: libev-devel
 BuildRequires: cairo-devel
 BuildRoot: %{_tmppath}/%{name}-%{version}
 
@@ -70,6 +71,7 @@ language.
 
 %prep
 %setup -q
+%patch1 -p 1
 %patch0 -p 1
 
 %build
