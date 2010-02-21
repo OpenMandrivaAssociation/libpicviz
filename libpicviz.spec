@@ -14,7 +14,7 @@ License: GPLv3+
 Group: Graphics
 URL: http://www.wallinfire.net/picviz
 #Source0: http://www.wallinfire.net/picviz/attachment/wiki/ReleasesDownload/%{name}-%{version}.tar.gz?format=raw
-Source0: %{name}-%{version}.tar.gz
+Source0: http://www.wallinfire.net/files/picviz/%{name}-%{version}.tar.gz
 Patch0: libpicviz-0.6.1-fix-underlinking.patch
 Patch1: libpicviz-0.6.1-external-libevent.patch
 
