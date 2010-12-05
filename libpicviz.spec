@@ -1,6 +1,6 @@
 %define name    libpicviz
 %define version 0.6.1
-%define release %mkrel 2
+%define release %mkrel 3
 %define major   2
 
 %define libname %mklibname picviz %{major}
