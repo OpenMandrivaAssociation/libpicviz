@@ -1,0 +1,39 @@
+diff -Naur -x '*~' libpicviz-0.6.1-external-libevent/CMakeLists.txt libpicviz-0.6.1-fix-underlinking/CMakeLists.txt
+--- libpicviz-0.6.1-external-libevent/CMakeLists.txt	2010-02-06 19:40:14.000000000 +0100
++++ libpicviz-0.6.1-fix-underlinking/CMakeLists.txt	2010-02-06 19:40:58.000000000 +0100
+@@ -51,7 +51,7 @@
+ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${LIBPICVIZ_SOURCE_DIR}/cmake)
+ FIND_PACKAGE(FLEX REQUIRED)
+ FIND_PACKAGE(BISON REQUIRED)
+-#FIND_PACKAGE(PCRE REQUIRED)
++FIND_PACKAGE(PCRE REQUIRED)
+ FIND_PACKAGE(PkgConfig)
+ 
+ pkg_check_modules(LIBEV REQUIRED libev)
+diff -Naur -x '*~' libpicviz-0.6.1-external-libevent/src/CMakeLists.txt libpicviz-0.6.1-fix-underlinking/src/CMakeLists.txt
+--- libpicviz-0.6.1-external-libevent/src/CMakeLists.txt	2010-02-06 19:40:14.000000000 +0100
++++ libpicviz-0.6.1-fix-underlinking/src/CMakeLists.txt	2010-02-06 19:42:03.000000000 +0100
+@@ -10,11 +10,6 @@
+ #set(CMAKE_SHARED_LINKER_FLAGS "-lm -lfl -ly")
+ #link_directories(${LIBPICVIZ_BINARY_DIR}/ ${LIBPICVIZ_BINARY_DIR}/gnulib/glthread ${LIBPICVIZ_BINARY_DIR}/libev)
+ 
+-IF(PCRE_FOUND)
+-    INCLUDE_DIRECTORIES(AFTER ${PCRE_INCLUDE_DIR})
+-    TARGET_LINK_LIBRARIES(picviz ${PCRE_LIBRARIES})
+-ENDIF(PCRE_FOUND)
+-
+ 
+ # Parser
+ BISON_TARGET(picviz ${LIBPICVIZ_SOURCE_DIR}/src/pgdl-parser.y ${LIBPICVIZ_BINARY_DIR}/src/pgdl-parser.c)
+@@ -31,6 +26,11 @@
+ #target_link_libraries(picviz "-lm -ldl -L${LIBPICVIZ_BINARY_DIR}/libev -lev")
+ target_link_libraries(picviz "-lm -ldl" ${LIBEV_LIBRARIES})
+ 
++IF(PCRE_FOUND)
++    INCLUDE_DIRECTORIES(AFTER ${PCRE_INCLUDE_DIR})
++    TARGET_LINK_LIBRARIES(picviz ${PCRE_LIBRARIES})
++ENDIF(PCRE_FOUND)
++
+ install(TARGETS picviz LIBRARY DESTINATION ${LIB_INSTALL_DIR})
+ install(FILES
+ 		include/axis.h

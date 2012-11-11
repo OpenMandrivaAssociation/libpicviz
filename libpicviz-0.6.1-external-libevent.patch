@@ -1,0 +1,45 @@
+diff -Naur -x '*~' -x '*.orig' -x '*.rej' libpicviz-0.6.1/CMakeLists.txt libpicviz-0.6.1-external-libevent/CMakeLists.txt
+--- libpicviz-0.6.1/CMakeLists.txt	2009-09-11 22:27:50.000000000 +0200
++++ libpicviz-0.6.1-external-libevent/CMakeLists.txt	2010-02-06 17:49:20.000000000 +0100
+@@ -54,6 +54,7 @@
+ #FIND_PACKAGE(PCRE REQUIRED)
+ FIND_PACKAGE(PkgConfig)
+ 
++pkg_check_modules(LIBEV REQUIRED libev)
+ pkg_check_modules(Cairo cairo-png)
+ 
+ # Versions of GCC may have warnings I haven't
+@@ -62,7 +63,6 @@
+ #set(CMAKE_C_FLAGS_DEBUG "-Wall -Wextra -O0 -ggdb")
+ 
+ add_subdirectory(gnulib)
+-add_subdirectory(libev)
+ add_subdirectory(src)
+ 
+ #SET_TARGET_PROPERTIES(picviz PROPERTIES LINKER_LANGUAGE C)
+diff -Naur -x '*~' -x '*.orig' -x '*.rej' libpicviz-0.6.1/src/CMakeLists.txt libpicviz-0.6.1-external-libevent/src/CMakeLists.txt
+--- libpicviz-0.6.1/src/CMakeLists.txt	2009-09-11 22:27:49.000000000 +0200
++++ libpicviz-0.6.1-external-libevent/src/CMakeLists.txt	2010-02-06 17:55:29.000000000 +0100
+@@ -1,11 +1,11 @@
+ add_subdirectory(plugins)
+ #add_subdirectory(bindings)
+ 
+-include_directories(${LIBPICVIZ_SOURCE_DIR}/src/include ${PCRE_INCLUDE_DIR} ${LIBPICVIZ_SOURCE_DIR}/gnulib/glthread ${LIBPICVIZ_SOURCE_DIR}/libev ${LIBPICVIZ_BINARY_DIR}/src)
++include_directories(${LIBPICVIZ_SOURCE_DIR}/src/include ${PCRE_INCLUDE_DIR} ${LIBPICVIZ_SOURCE_DIR}/gnulib/glthread ${LIBEV_INCLUDE_DIRS} ${LIBPICVIZ_BINARY_DIR}/src)
+ 
+ 
+ link_directories(
+-  ${LIBPICVIZ_BINARY_DIR}/libev
++  ${LIBEV_LIBRARY_DIRS}
+ )
+ #set(CMAKE_SHARED_LINKER_FLAGS "-lm -lfl -ly")
+ #link_directories(${LIBPICVIZ_BINARY_DIR}/ ${LIBPICVIZ_BINARY_DIR}/gnulib/glthread ${LIBPICVIZ_BINARY_DIR}/libev)
+@@ -29,7 +29,7 @@
+ set_target_properties(picviz PROPERTIES SOVERSION 2)
+ 
+ #target_link_libraries(picviz "-lm -ldl -L${LIBPICVIZ_BINARY_DIR}/libev -lev")
+-target_link_libraries(picviz "-lm -ldl -L${LIBPICVIZ_BINARY_DIR}/libev/ -lev")
++target_link_libraries(picviz "-lm -ldl" ${LIBEV_LIBRARIES})
+ 
+ install(TARGETS picviz LIBRARY DESTINATION ${LIB_INSTALL_DIR})
+ install(FILES
