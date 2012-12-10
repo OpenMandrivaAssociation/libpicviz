@@ -101,3 +101,28 @@ rm -rf %{buildroot}
 %dir %{_libdir}/%{name}-%major
 %{_libdir}/%{name}-%major/*.so
 
+
+
+%changelog
+* Sat Feb 11 2012 Oden Eriksson <oeriksson@mandriva.com> 0.6.1-4mdv2012.0
++ Revision: 772998
+- relink against libpcre.so.1
+
+* Sun Dec 05 2010 Oden Eriksson <oeriksson@mandriva.com> 0.6.1-3mdv2011.0
++ Revision: 609772
+- rebuild
+
+  + Guillaume Rousse <guillomovitch@mandriva.org>
+    - fix sources URL
+
+* Sat Feb 06 2010 Guillaume Rousse <guillomovitch@mandriva.org> 0.6.1-2mdv2010.1
++ Revision: 501422
+- use external libev
+
+* Tue Jan 26 2010 Guillaume Rousse <guillomovitch@mandriva.org> 0.6.1-1mdv2010.1
++ Revision: 496519
+- import libpicviz
+
+
+* Mon Jan 25 2010 Guillaume Rousse <guillomovitch@mandriva.org> 0.6.1-1mdv2010.1
+- first standalone package 
