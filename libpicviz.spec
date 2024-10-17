@@ -12,7 +12,7 @@ Release: %release
 Summary: Parallel coordinates plotter
 License: GPLv3+
 Group: Graphics
-URL: http://www.wallinfire.net/picviz
+URL: https://www.wallinfire.net/picviz
 #Source0: http://www.wallinfire.net/picviz/attachment/wiki/ReleasesDownload/%{name}-%{version}.tar.gz?format=raw
 Source0: http://www.wallinfire.net/files/picviz/%{name}-%{version}.tar.gz
 Patch0: libpicviz-0.6.1-fix-underlinking.patch
